@@ -1,0 +1,6 @@
+[submodule "litellm"]
+	path = litellm
+	url = https://github.com/BerriAI/litellm.git
+[submodule "langfuse"]
+	path = langfuse
+	url = https://github.com/langfuse/langfuse.git
