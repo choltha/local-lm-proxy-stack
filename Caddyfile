@@ -1,5 +1,5 @@
 
-http://langfuse.localhost:4001 {
+http://langfuse.localhost:8001 {
   handle /* {
     reverse_proxy langfuse-server:3000
   }
@@ -9,7 +9,7 @@ http://langfuse.localhost:4001 {
   }
 }
 
-http://litellm.localhost:4001 {
+http://litellm.localhost:8001 {
   handle /* {
     reverse_proxy litellm-server:4000
   }

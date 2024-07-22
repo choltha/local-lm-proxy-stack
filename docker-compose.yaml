@@ -18,12 +18,13 @@ services:
         DATABASE_URL: "postgresql://postgres:example@litellm-db:5432/postgres"
         STORE_MODEL_IN_DB: "True" # allows adding models to proxy via UI
     env_file:
-      - litellm/.env
+      - litellm.env
     networks:
       - local-lm-proxy
       - internet-access
     volumes:
       - ./litellm_config.yaml:/app/config.yaml
+    command: [ "--config", "/app/config.yaml", "--detailed_debug" ]
 
 
   litellm-db:
@@ -126,7 +127,7 @@ services:
   caddy:
     image: caddy:2
     ports:
-      - "4001:4001"
+      - "8001:8001"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
