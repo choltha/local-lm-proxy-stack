@@ -21,6 +21,7 @@ services:
       - litellm/.env
     networks:
       - local-lm-proxy
+      - internet-access
 
 
   litellm-db:
@@ -129,3 +130,6 @@ volumes:
 networks:
   local-lm-proxy:
     name: local-lm-proxy
+    internal: true
+  internet-access:
+    driver: bridge
