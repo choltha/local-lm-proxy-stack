@@ -22,6 +22,8 @@ services:
     networks:
       - local-lm-proxy
       - internet-access
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
 
 
   litellm-db:
@@ -68,7 +70,7 @@ services:
     networks:
       - local-lm-proxy
 
-  worker:
+  langfuse-worker:
     build:
       dockerfile: ./worker/Dockerfile
       context: ./langfuse
@@ -121,6 +123,15 @@ services:
     networks:
       - local-lm-proxy
 
+  caddy:
+    image: caddy:2
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - local-lm-proxy
+      - internet-access
 
 volumes:
   langfuse-database_data:
