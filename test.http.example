@@ -1,0 +1,30 @@
+
+curl http://litellm.localhost:8001/v1/chat/completions \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer sk-asdf" \
+-d '{
+  "model": "phi3",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Who are you?"
+    }
+  ]
+}'
+
+
+###
+POST http://litellm.localhost:8001/v1/chat/completions
+Authorization: Bearer sk-asdf
+Content-Type: application/json
+
+{
+  "model": "phi3",
+  "temperature": 0,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Who are you?"
+    }
+  ]
+}
