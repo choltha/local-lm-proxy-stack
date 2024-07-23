@@ -17,6 +17,9 @@ services:
     environment:
         DATABASE_URL: "postgresql://postgres:example@litellm-db:5432/postgres"
         STORE_MODEL_IN_DB: "True" # allows adding models to proxy via UI
+        REDIS_HOST: "litellm-redis"
+        REDIS_PORT: "6379"
+        REDIS_AUTH: "myredissecret"
     env_file:
       - litellm.env
     networks:
@@ -25,7 +28,6 @@ services:
     volumes:
       - ./litellm_config.yaml:/app/config.yaml
     command: [ "--config", "/app/config.yaml", "--detailed_debug" ]
-
 
   litellm-db:
     image: postgres
@@ -41,6 +43,15 @@ services:
     networks:
       - local-lm-proxy
 
+  litellm-redis:
+    image: redis:7.2.4
+    command: >
+      --requirepass ${REDIS_AUTH:-myredissecret}
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - local-lm-proxy
 
   langfuse-server:
     build:
